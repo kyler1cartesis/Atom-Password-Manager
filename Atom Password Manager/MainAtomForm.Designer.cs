@@ -47,7 +47,7 @@
             this.genButton = new System.Windows.Forms.Button();
             this.noteBox = new System.Windows.Forms.TextBox();
             this.siteBox = new System.Windows.Forms.TextBox();
-            this.passBox = new System.Windows.Forms.TextBox();
+            this.passwordBox = new System.Windows.Forms.TextBox();
             this.loginBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -311,7 +311,7 @@
             this.groupBox1.Controls.Add(this.genButton);
             this.groupBox1.Controls.Add(this.noteBox);
             this.groupBox1.Controls.Add(this.siteBox);
-            this.groupBox1.Controls.Add(this.passBox);
+            this.groupBox1.Controls.Add(this.passwordBox);
             this.groupBox1.Controls.Add(this.loginBox);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -376,11 +376,11 @@
             // 
             // passBox
             // 
-            this.passBox.Location = new System.Drawing.Point(274, 23);
-            this.passBox.Name = "passBox";
-            this.passBox.Size = new System.Drawing.Size(165, 21);
-            this.passBox.TabIndex = 1;
-            this.passBox.UseSystemPasswordChar = true;
+            this.passwordBox.Location = new System.Drawing.Point(274, 23);
+            this.passwordBox.Name = "passBox";
+            this.passwordBox.Size = new System.Drawing.Size(165, 21);
+            this.passwordBox.TabIndex = 1;
+            this.passwordBox.UseSystemPasswordChar = true;
             // 
             // loginBox
             // 
@@ -563,7 +563,7 @@
         private System.Windows.Forms.Button genButton;
         private System.Windows.Forms.TextBox noteBox;
         private System.Windows.Forms.TextBox siteBox;
-        private System.Windows.Forms.TextBox passBox;
+        private System.Windows.Forms.TextBox passwordBox;
         private System.Windows.Forms.TextBox loginBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;

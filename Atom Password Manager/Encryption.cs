@@ -2,21 +2,16 @@
 using System.Security.Cryptography;
 using System.IO;
 
-namespace Atom_Password_Manager
-{
-    class Encriptie
-    {
+namespace Atom_Password_Manager {
+    class Encryption {
         //https://www.codeproject.com/Articles/769741/Csharp-AES-bits-Encryption-Library-with-Salt
 
         byte[] saltBytes = new byte[8];
-        public static byte[] AES_Encrypt(byte[] bytesToBeEncrypted, byte[] passwordBytes)
-        {
+        public static byte[] AES_Encrypt (byte[] bytesToBeEncrypted, byte[] passwordBytes) {
             byte[] encryptedBytes = null;
-            byte[] saltBytes = new byte[] {1, 2, 3, 4, 5, 6, 7, 8};
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (RijndaelManaged AES = new RijndaelManaged())
-                {
+            byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+            using (MemoryStream ms = new MemoryStream()) {
+                using (RijndaelManaged AES = new RijndaelManaged()) {
                     AES.KeySize = 256;
                     AES.BlockSize = 128;
 
@@ -26,8 +21,7 @@ namespace Atom_Password_Manager
 
                     AES.Mode = CipherMode.CBC;
 
-                    using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write))
-                    {
+                    using (var cs = new CryptoStream(ms, AES.CreateEncryptor(), CryptoStreamMode.Write)) {
                         cs.Write(bytesToBeEncrypted, 0, bytesToBeEncrypted.Length);
                         cs.Close();
                     }
@@ -37,16 +31,13 @@ namespace Atom_Password_Manager
 
             return encryptedBytes;
         }
-        public static byte[] AES_Decrypt(byte[] bytesToBeDecrypted, byte[] passwordBytes)
-        {
+        public static byte[] AES_Decrypt (byte[] bytesToBeDecrypted, byte[] passwordBytes) {
             byte[] decryptedBytes = null;
 
             byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
-            using (MemoryStream ms = new MemoryStream())
-            {
-                using (RijndaelManaged AES = new RijndaelManaged())
-                {
+            using (MemoryStream ms = new MemoryStream()) {
+                using (RijndaelManaged AES = new RijndaelManaged()) {
 
                     AES.KeySize = 256;
                     AES.BlockSize = 128;
@@ -57,8 +48,7 @@ namespace Atom_Password_Manager
 
                     AES.Mode = CipherMode.CBC;
 
-                    using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Write))
-                    {
+                    using (var cs = new CryptoStream(ms, AES.CreateDecryptor(), CryptoStreamMode.Write)) {
                         cs.Write(bytesToBeDecrypted, 0, bytesToBeDecrypted.Length);
                         cs.Close();
                     }
@@ -69,8 +59,7 @@ namespace Atom_Password_Manager
 
             return decryptedBytes;
         }
-        public static void EncryptFile(string file, string password)
-        {
+        public static void EncryptFile (string file, string password) {
 
             byte[] bytesToBeEncrypted = File.ReadAllBytes(file);
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -81,8 +70,7 @@ namespace Atom_Password_Manager
             byte[] bytesEncrypted = AES_Encrypt(bytesToBeEncrypted, passwordBytes);
             File.WriteAllBytes(file, bytesEncrypted);
         }
-        public static void DecryptFile(string file, string password)
-        {
+        public static void DecryptFile (string file, string password) {
 
             byte[] bytesToBeDecrypted = File.ReadAllBytes(file);
             byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
@@ -91,9 +79,9 @@ namespace Atom_Password_Manager
             byte[] bytesDecrypted = AES_Decrypt(bytesToBeDecrypted, passwordBytes);
 
             File.WriteAllBytes(file, bytesDecrypted);
-            string extension = System.IO.Path.GetExtension(file);
+            string extension = Path.GetExtension(file);
             string result = file.Substring(0, file.Length - extension.Length);
-            System.IO.File.Move(file, result + ManagerParole.Extensie);
+            File.Move(file, result + ManagerParole.Extension);
         }
     }
 }
